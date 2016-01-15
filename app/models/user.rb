@@ -8,7 +8,8 @@ class User < ActiveRecord::Base
                     uniqueness: { case_sensitive: false }
 
   has_secure_password
-  validates :password, presence: true, length: { minimum: 6 }
+  validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
+  #Accepts nil Because nil passwords now bypass the main presence validation but are still caught by has_secure_password , this also fixes the duplicate error message
 
   # Returns the hash digest of the given string.
   def User.digest(string)
